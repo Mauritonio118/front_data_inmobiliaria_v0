@@ -5,7 +5,7 @@
   // =========================================================
   "slug": "realblocks", // string unico, ideal para URLs internas, ids estables, dedupe
   "name": "RealBlocks", // nombre publico
-  "primaryDomain": "realblocks.com", // dominio canonico sin protocolo ni rutas
+  "primaryDomain": "https://realblocks.com", // dominio canonico sin protocolo ni rutas
   "description": "Plataforma de tokenización inmobiliaria enfocada en inversores institucionales.", // resumen corto
   // Fecha de fundacion si la consigues
   "foundedAt": "2018-04-12T00:00:00Z", // date

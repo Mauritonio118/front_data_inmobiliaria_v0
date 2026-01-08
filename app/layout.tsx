@@ -17,17 +17,19 @@ export const metadata: Metadata = {
   description: "Plataforma de datos inmobiliarios",
 };
 
+import { ThemeProvider } from "@/app/providers/theme-provider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
