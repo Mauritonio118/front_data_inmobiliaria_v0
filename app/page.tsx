@@ -14,6 +14,12 @@ export default function Home() {
           Plataforma avanzada de datos inmobiliarios
         </p>
       </div>
+      <div className="mt-8">
+        <a href="/platforms" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+          View Platforms
+        </a>
+      </div>
+
     </main>
   );
 }
