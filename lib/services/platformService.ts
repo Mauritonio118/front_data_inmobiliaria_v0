@@ -46,7 +46,12 @@ export async function getPlatformBySlug(slug: string): Promise<Platform | null> 
                 }
             );
 
-        return platform;
+        if (!platform) return null;
+
+        return {
+            ...platform,
+            _id: platform._id?.toString()
+        };
     } catch (error) {
         console.error(`Failed to get platform with slug ${slug}:`, error);
         throw new Error(`Failed to get platform with slug ${slug}`);
@@ -79,12 +84,16 @@ export async function getPlatforms(filter: { status?: string } = {}): Promise<Pl
                     name: 1,
                     slug: 1,
                     'operational.status': 1,
-                    primaryDomain: 1 // Use primaryDomain as requested
+                    primaryDomain: 1,
+                    mobileApps: 1 // Include mobileApps to check existence
                 }
             })
             .toArray();
 
-        return platforms;
+        return platforms.map(platform => ({
+            ...platform,
+            _id: platform._id?.toString()
+        }));
     } catch (error) {
         console.error('Failed to get platforms:', error);
         throw new Error('Failed to get platforms');
