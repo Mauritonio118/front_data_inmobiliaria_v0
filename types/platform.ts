@@ -152,6 +152,9 @@ export interface Platform {
         pathPrefixes?: string[];
         updatedAt?: string | Date;
     };
+    pageRoutes?: {
+        faviconRoute?: string;
+    };
     mobileApps?: PlatformMobileApp[];
     socialProfiles?: PlatformSocialProfile[];
     legal?: PlatformLegal;

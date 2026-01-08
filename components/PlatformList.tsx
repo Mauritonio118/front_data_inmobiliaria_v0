@@ -28,7 +28,7 @@ export default function PlatformList({ platforms }: PlatformListProps) {
                         <th className="px-4 py-3 font-medium">#</th>
                         <th className="px-4 py-3 font-medium">Platform</th>
                         <th className="px-4 py-3 font-medium text-center">App</th>
-                        <th className="px-4 py-3 font-medium text-right">Action</th>
+                        <th className="px-4 py-3 font-medium text-right">Web site</th>
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
@@ -46,10 +46,16 @@ export default function PlatformList({ platforms }: PlatformListProps) {
                                 </td>
                                 <td className="px-4 py-4">
                                     <div className="flex items-center gap-3">
+                                        {platform.pageRoutes?.faviconRoute && (
+                                            <img
+                                                src={platform.pageRoutes.faviconRoute}
+                                                alt={`${platform.name} icon`}
+                                                className="w-5 h-5 object-contain"
+                                            />
+                                        )}
                                         <span className="font-semibold text-foreground group-hover:text-primary transition-colors">
                                             {platform.name || 'Unknown Platform'}
                                         </span>
-                                        {/* Remove slug display as requested */}
                                     </div>
                                 </td>
                                 <td className="px-4 py-4 text-center">
