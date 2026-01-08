@@ -85,7 +85,8 @@ export async function getPlatforms(filter: { status?: string } = {}): Promise<Pl
                     slug: 1,
                     'operational.status': 1,
                     primaryDomain: 1,
-                    mobileApps: 1 // Include mobileApps to check existence
+                    mobileApps: 1, // Include mobileApps to check existence
+                    pageRoutes: 1 // Include pageRoutes for favicon
                 }
             })
             .toArray();
