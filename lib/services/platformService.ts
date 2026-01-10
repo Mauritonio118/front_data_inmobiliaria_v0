@@ -38,7 +38,6 @@ export async function getPlatformBySlug(slug: string): Promise<Platform | null> 
                 { slug: slug },
                 {
                     projection: {
-                        dataSources: 0,
                         theCrowdSpace: 0,
                         meta: 0,
                         projectRoutes: 0
