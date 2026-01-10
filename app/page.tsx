@@ -13,7 +13,7 @@ export default function Home() {
         <div className="absolute top-0 -right-4 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
         <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
 
-        <div className="container px-4 md:px-6 relative z-10 text-center">
+        <div className="container px-4 md:px-6 mx-auto relative z-10 text-center">
           <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-8 backdrop-blur-sm">
             <span className="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
             The Beta Phase is Live
@@ -48,7 +48,7 @@ export default function Home() {
 
       {/* Vision / Features Grid */}
       <section id="vision" className="py-24 bg-card/30 border-y border-border/50">
-        <div className="container px-4 md:px-6">
+        <div className="container px-4 md:px-6 mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight mb-4">Why Chastor?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -78,7 +78,7 @@ export default function Home() {
 
       {/* Roadmap / Coming Soon */}
       <section className="py-24 relative overflow-hidden">
-        <div className="container px-4 md:px-6">
+        <div className="container px-4 md:px-6 mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Building the Future of <br />Real Estate Intelligence</h2>
@@ -137,7 +137,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-12 border-t border-border bg-card/50">
-        <div className="container px-4 md:px-6 flex flex-col md:flex-row justify-center items-center gap-6">
+        <div className="container px-4 md:px-6 mx-auto flex flex-col md:flex-row justify-center items-center gap-6">
           <div className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Chastor. All rights reserved.
           </div>
