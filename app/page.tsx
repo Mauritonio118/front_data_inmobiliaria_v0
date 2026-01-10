@@ -36,12 +36,6 @@ export default function Home() {
               Explore Platforms
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
-            <Link
-              href="#vision"
-              className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-foreground bg-secondary hover:bg-secondary/80 rounded-full transition-all border border-border"
-            >
-              Learn More
-            </Link>
           </div>
         </div>
       </section>

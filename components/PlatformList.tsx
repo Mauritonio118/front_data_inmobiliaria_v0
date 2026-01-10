@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { Platform } from '@/types/platform';
 
 interface PlatformListProps {
@@ -8,15 +10,22 @@ interface PlatformListProps {
 
 export default function PlatformList({ platforms }: PlatformListProps) {
 
+    const router = useRouter();
+
+    const sortedPlatforms = [...platforms].sort((a, b) => {
+        if (a.slug === 'demo') return -1;
+        if (b.slug === 'demo') return 1;
+        return 0;
+    });
+
     const handleRowClick = (slug: string) => {
-        // Open the platform details page in a new tab
-        window.open(`/platforms/${slug}`, '_blank', 'noopener,noreferrer');
+        router.push(`/platforms/${slug}`);
     };
 
-    const handleVisitClick = (e: React.MouseEvent, url?: string) => {
+    const handleVisitClick = (e: React.MouseEvent, slug?: string) => {
         e.stopPropagation();
-        if (url) {
-            window.open(url, '_blank', 'noopener,noreferrer');
+        if (slug) {
+            router.push(`/platforms/${slug}`);
         }
     };
 
@@ -32,7 +41,7 @@ export default function PlatformList({ platforms }: PlatformListProps) {
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
-                    {platforms.map((platform, index) => {
+                    {sortedPlatforms.map((platform, index) => {
                         const websiteUrl = platform.primaryDomain;
 
                         return (
@@ -75,7 +84,7 @@ export default function PlatformList({ platforms }: PlatformListProps) {
                                 </td>
                                 <td className="px-4 py-4 text-right">
                                     <button
-                                        onClick={(e) => handleVisitClick(e, websiteUrl)}
+                                        onClick={(e) => handleVisitClick(e, platform.slug)}
                                         className={`
                         inline-flex items-center justify-center px-4 py-1.5 text-xs font-bold rounded-lg
                         border transition-all duration-200
