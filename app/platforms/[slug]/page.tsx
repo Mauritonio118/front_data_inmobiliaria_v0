@@ -22,10 +22,10 @@ export default async function PlatformPage({ params }: PageProps) {
 
     if (error) {
         return (
-            <main className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-xl text-center">
-                    <h1 className="text-xl font-bold text-red-600 mb-2">Error Loading Platform</h1>
-                    <p className="text-gray-700">{error}</p>
+            <main className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-4xl mx-auto p-6 bg-card text-card-foreground shadow-lg rounded-xl text-center border border-border">
+                    <h1 className="text-xl font-bold text-destructive mb-2">Error Loading Platform</h1>
+                    <p className="text-muted-foreground">{error}</p>
                 </div>
             </main>
         );
@@ -36,7 +36,7 @@ export default async function PlatformPage({ params }: PageProps) {
     }
 
     return (
-        <main className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        <main className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
             <PlatformDetails platform={platform} />
         </main>
     );
