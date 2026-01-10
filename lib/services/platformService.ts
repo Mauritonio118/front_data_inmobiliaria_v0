@@ -1,6 +1,6 @@
 
 import clientPromise from '@/lib/mongodb';
-import { Platform } from '@/types/platform';
+import { Platform, PlatformDataSource } from '@/types/platform';
 
 
 const COLLECTION_NAME = 'platforms';
@@ -55,6 +55,35 @@ export async function getPlatformBySlug(slug: string): Promise<Platform | null> 
     } catch (error) {
         console.error(`Failed to get platform with slug ${slug}:`, error);
         throw new Error(`Failed to get platform with slug ${slug}`);
+    }
+}
+
+/**
+ * Retrieves only the dataSources field for a specific platform by its slug.
+ * @param slug - The unique slug of the platform.
+ * @returns The array of data sources or null if not found.
+ */
+export async function getPlatformDataSources(slug: string): Promise<PlatformDataSource[] | null> {
+    try {
+        const client = await clientPromise;
+        const db = client.db();
+
+        const platform = await db
+            .collection<Platform>(COLLECTION_NAME)
+            .findOne(
+                { slug: slug },
+                {
+                    projection: {
+                        dataSources: 1,
+                        _id: 0
+                    }
+                }
+            );
+
+        return platform?.dataSources || null;
+    } catch (error) {
+        console.error(`Failed to get dataSources for platform ${slug}:`, error);
+        throw new Error(`Failed to get dataSources for platform ${slug}`);
     }
 }
 
