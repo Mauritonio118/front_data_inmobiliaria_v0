@@ -40,7 +40,6 @@ export default function PlatformDetails({ platform }: PlatformDetailsProps) {
         geography,
         compliance,
         tech,
-        contact, // Assuming this might exist or we use alternatives
         socialProfiles,
         mobileApps,
         foundedAt,
