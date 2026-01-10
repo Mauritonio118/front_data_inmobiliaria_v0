@@ -1,5 +1,6 @@
-import { getPlatformBySlug } from '@/lib/services/platformService';
+import { getPlatformBySlug, getPlatformDataSources } from '@/lib/services/platformService';
 import PlatformDetails from '@/components/PlatformDetails';
+import PlatformDataSources from '@/components/PlatformDataSources';
 import { notFound } from 'next/navigation';
 
 interface PageProps {
@@ -10,26 +11,18 @@ interface PageProps {
 
 export default async function PlatformPage({ params }: PageProps) {
     const { slug } = await params;
-    let platform = null;
-    let error = null;
 
-    try {
-        platform = await getPlatformBySlug(slug);
-    } catch (e: any) {
-        console.error(`Error fetching platform ${slug}:`, e);
-        error = e.message;
-    }
-
-    if (error) {
-        return (
-            <main className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-4xl mx-auto p-6 bg-card text-card-foreground shadow-lg rounded-xl text-center border border-border">
-                    <h1 className="text-xl font-bold text-destructive mb-2">Error Loading Platform</h1>
-                    <p className="text-muted-foreground">{error}</p>
-                </div>
-            </main>
-        );
-    }
+    // Parallel data fetching
+    const [platform, dataSources] = await Promise.all([
+        getPlatformBySlug(slug).catch(e => {
+            console.error(`Error fetching platform ${slug}:`, e);
+            return null;
+        }),
+        getPlatformDataSources(slug).catch(e => {
+            console.error(`Error fetching dataSources for ${slug}:`, e);
+            return null;
+        })
+    ]);
 
     if (!platform) {
         notFound();
@@ -38,6 +31,7 @@ export default async function PlatformPage({ params }: PageProps) {
     return (
         <main className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
             <PlatformDetails platform={platform} />
+            <PlatformDataSources dataSources={dataSources} />
         </main>
     );
 }
