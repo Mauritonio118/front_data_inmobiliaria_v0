@@ -4,7 +4,6 @@ import { Platform } from '@/types/platform';
 import {
     FaGlobe,
     FaLinkedin,
-    FaTwitter,
     FaFacebook,
     FaInstagram,
     FaYoutube,
@@ -19,8 +18,11 @@ import {
     FaQuestionCircle,
     FaGooglePlay,
     FaAppStore,
-    FaMobileAlt
+    FaMobileAlt,
+    FaMedium,
+    FaTiktok
 } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 
 interface PlatformDetailsProps {
     platform: Platform;
@@ -67,16 +69,26 @@ export default function PlatformDetails({ platform }: PlatformDetailsProps) {
     };
 
     // Helper to get social icon
-    const getSocialIcon = (network: string) => {
+    const getSocialIcon = (network: string, url?: string) => {
         const lower = network.toLowerCase();
+        const urlLower = (url || '').toLowerCase();
         if (lower.includes('linkedin')) return <FaLinkedin className="w-5 h-5 text-[#0077b5]" />;
-        if (lower.includes('twitter') || lower.includes('x.com')) return <FaTwitter className="w-5 h-5 text-black" />;
+        if (lower.includes('twitter') || lower.includes('x.com') || urlLower.includes('x.com') || urlLower.includes('twitter.com')) return <FaXTwitter className="w-5 h-5 text-foreground" />;
         if (lower.includes('facebook')) return <FaFacebook className="w-5 h-5 text-[#1877f2]" />;
         if (lower.includes('instagram')) return <FaInstagram className="w-5 h-5 text-[#e4405f]" />;
         if (lower.includes('youtube')) return <FaYoutube className="w-5 h-5 text-[#ff0000]" />;
         if (lower.includes('telegram')) return <FaTelegram className="w-5 h-5 text-[#0088cc]" />;
         if (lower.includes('discord')) return <FaDiscord className="w-5 h-5 text-[#5865F2]" />;
+        if (lower.includes('tiktok') || urlLower.includes('tiktok.com')) return <FaTiktok className="w-5 h-5 text-foreground" />;
+        if (lower.includes('medium') || urlLower.includes('medium.com')) return <FaMedium className="w-5 h-5 text-foreground" />;
         return <FaGlobe className="w-5 h-5 text-muted-foreground" />;
+    };
+
+    // Helper to check if a social profile is WhatsApp
+    const isWhatsApp = (platform: string, url?: string) => {
+        const lower = platform.toLowerCase();
+        const urlLower = (url || '').toLowerCase();
+        return lower.includes('whatsapp') || urlLower.includes('whatsapp.com') || urlLower.includes('wa.me');
     };
 
     // Helper to get store icon
@@ -294,22 +306,24 @@ export default function PlatformDetails({ platform }: PlatformDetailsProps) {
                                 </div>
                             )}
 
-                            {socialProfiles && socialProfiles.length > 0 && (
+                            {socialProfiles && socialProfiles.filter(social => !isWhatsApp(social.platform || '', social.url)).length > 0 && (
                                 <div>
                                     <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Social Profiles</h4>
                                     <div className="flex flex-wrap gap-2">
-                                        {socialProfiles.map((social, idx) => (
-                                            <a
-                                                key={idx}
-                                                href={social.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="p-2 bg-card rounded-full border border-border hover:border-primary/50 hover:bg-muted/50 transition-all"
-                                                title={social.platform}
-                                            >
-                                                {getSocialIcon(social.platform || 'web')}
-                                            </a>
-                                        ))}
+                                        {socialProfiles
+                                            .filter(social => !isWhatsApp(social.platform || '', social.url))
+                                            .map((social, idx) => (
+                                                <a
+                                                    key={idx}
+                                                    href={social.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="p-2 bg-card rounded-full border border-border hover:border-primary/50 hover:bg-muted/50 transition-all"
+                                                    title={social.platform}
+                                                >
+                                                    {getSocialIcon(social.platform || 'web', social.url)}
+                                                </a>
+                                            ))}
                                     </div>
                                 </div>
                             )}

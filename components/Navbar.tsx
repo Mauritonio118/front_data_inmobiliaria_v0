@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ModeToggle } from '@/components/mode-toggle';
 import { useEffect, useState } from 'react';
@@ -28,17 +29,22 @@ export default function Navbar() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-background/80 backdrop-blur-md border-b border-border shadow-sm'
-                    : 'bg-transparent'
+                ? 'bg-background/80 backdrop-blur-md border-b border-border shadow-sm'
+                : 'bg-transparent'
                 }`}
         >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2">
-                        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500">
-                            Chastor
-                        </span>
+                        <Image
+                            src="/images/logos/logo_chastor.png"
+                            alt="Chastor Logo"
+                            width={120}
+                            height={36}
+                            className="h-9 w-auto"
+                            priority
+                        />
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -48,8 +54,8 @@ export default function Navbar() {
                                 key={link.href}
                                 href={link.href}
                                 className={`text-sm font-medium transition-colors hover:text-primary ${pathname === link.href
-                                        ? 'text-primary'
-                                        : 'text-muted-foreground'
+                                    ? 'text-primary'
+                                    : 'text-muted-foreground'
                                     }`}
                             >
                                 {link.name}
@@ -83,8 +89,8 @@ export default function Navbar() {
                                 href={link.href}
                                 onClick={() => setMobileMenuOpen(false)}
                                 className={`block px-3 py-2 rounded-md text-base font-medium ${pathname === link.href
-                                        ? 'bg-primary/10 text-primary'
-                                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                                    ? 'bg-primary/10 text-primary'
+                                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                                     }`}
                             >
                                 {link.name}

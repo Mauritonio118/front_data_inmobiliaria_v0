@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Front Data Inmobiliaria",
+  title: "Chastor - Real Estate Data",
   description: "Plataforma de datos inmobiliarios",
 };
 
