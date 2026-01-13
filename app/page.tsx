@@ -1,7 +1,37 @@
+'use client';
+
 import Link from 'next/link';
-import { ArrowRight, BarChart3, Globe2, ShieldCheck, Database, Layers } from 'lucide-react';
+import { ArrowRight, BarChart3, Globe2, ShieldCheck, Database, Layers, Share2 } from 'lucide-react';
 
 export default function Home() {
+  const shareUrl = 'https://www.chastor.com';
+  const shareTitle = 'Chastor - Transparency for the Fractional Real Estate Market';
+  const shareText = 'Discover the best platforms for tokenized real estate and crowdfunding investments.';
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl,
+        });
+      } catch (err) {
+        // User cancelled or share failed
+        console.log('Share cancelled or failed');
+      }
+    } else {
+      // Fallback: Copy URL to clipboard
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        alert('Link copied to clipboard!');
+      } catch (err) {
+        // Fallback for older browsers
+        prompt('Copy this link:', shareUrl);
+      }
+    }
+  };
+
   return (
     <main className="flex min-h-screen flex-col">
 
@@ -28,7 +58,7 @@ export default function Home() {
             Compare platforms, analyze opportunities, and invest with confidence in tokenized real estate and crowdfunding.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               href="/platforms"
               className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-primary hover:bg-primary/90 rounded-full transition-all hover:scale-105 shadow-lg shadow-primary/25"
@@ -36,6 +66,13 @@ export default function Home() {
               Explore Platforms
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
+            <button
+              onClick={handleShare}
+              className="inline-flex sm:hidden items-center justify-center px-5 py-2.5 text-sm font-medium text-foreground border border-border bg-secondary/80 hover:bg-secondary hover:border-primary/30 rounded-full transition-all hover:scale-105 shadow-sm"
+            >
+              <Share2 className="mr-2 h-4 w-4" />
+              Share
+            </button>
           </div>
         </div>
       </section>
